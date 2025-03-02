@@ -1,55 +1,90 @@
-name: Deploy static content to Pages
+name: Deploy static content to update the action file `.github/workflows/vite-gh-action.yml` Pages
 
 on:
   push:
-    branches: ['main']
-  workflow_dispatch:
+    branches:
+      - main to use a supported version.
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+Here is how you can update your workflow file `.github/work:
 
-concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+```yaml
+name: Deploy static content to Pages
+
+
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
+
+   flows/vite-gh-action.yml`:
+
+```yaml
+name: steps:
+      - name: Checkout repository
+        uses:on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    Deploy static content to Pages
+
+on:
+  push:
+    branches:
+      runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4  # Updated
+      - uses: actions - main
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
+jobs:
+  build:
+    runs-on: ubuntu-latest actions/checkout@v2
+
+      - name: Install dependencies
+       
+    steps:
+      - name: Checkout repository
+       /checkout@v3
+      
+      - name: Setup Node.js run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Upload artifact uses: actions/checkout@v3
+
+      # Other build steps...
+
+
+        uses: actions/setup-node@v3
         with:
-          version: 8  # Use latest pnpm version
+         
+        uses: actions/upload-artifact@v      - name: Upload artifact
+        uses: actions node-version: '16'
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4  # Updated
+      - name: Install dependencies
+2 # Update this action version
+
+      - name: Deploy to Git/upload-artifact@v4
         with:
-          node-version: 18
-          cache: 'pnpm'
-          cache-dependency-path: ./pnpm-lock.yaml
+          name:        run: npm install
 
-      - name: Install Dependencies
-        run: pnpm install
+      - name: BuildHub Pages
+        uses: actions/deploy-pages@v artifact-name
+          path: path/to/artifact
 
-      - name: Build Project
-        run: pnpm build
+     
+        run: npm run build
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4  # Updated
-
-      - name: Upload Build Artifacts
-        uses: actions/upload-pages-artifact@v2  # Updated
+      - name: Upload artifact - name: Deploy to GitHub Pages
+        uses: actions1
         with:
-          path: './dist'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2  # Updated
+        uses: actions/upload-pages-artifact@v/deploy-pages@v1
+        with:
+          # Deployment configuration```
+
+Update the `uses: actions/upload-artifact@...
