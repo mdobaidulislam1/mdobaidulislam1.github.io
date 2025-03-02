@@ -1,90 +1,56 @@
-name: Deploy static content to update the action file `.github/workflows/vite-gh-action.yml` Pages
-
-on:
-  push:
-    branches:
-      - main to use a supported version.
-
-Here is how you can update your workflow file `.github/work:
-
-```yaml
+# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
-
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-   flows/vite-gh-action.yml`:
-
-```yaml
-name: steps:
-      - name: Checkout repository
-        uses:on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    Deploy static content to Pages
-
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      runs-on: ubuntu-latest
+    branches: ['main']
 
-    steps:
-      - uses: actions - main
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest actions/checkout@v2
-
-      - name: Install dependencies
-       
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-       /checkout@v3
-      
-      - name: Setup Node.js run: npm install
-
-      - name: Build the project
-        run: npm run build
-
-      - name: Upload artifact uses: actions/checkout@v3
-
-      # Other build steps...
-
-
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7
+      - name: Set up Node
         uses: actions/setup-node@v3
         with:
-         
-        uses: actions/upload-artifact@v      - name: Upload artifact
-        uses: actions node-version: '16'
-
+          node-version: 18
+          cache: 'pnpm'
+          cache-dependency-path: ./pnpm-lock.yaml
       - name: Install dependencies
-2 # Update this action version
-
-      - name: Deploy to Git/upload-artifact@v4
+        run: pnpm install
+      - name: Build
+        run: pnpm build
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          name:        run: npm install
-
-      - name: BuildHub Pages
-        uses: actions/deploy-pages@v artifact-name
-          path: path/to/artifact
-
-     
-        run: npm run build
-
-      - name: Upload artifact - name: Deploy to GitHub Pages
-        uses: actions1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-        uses: actions/upload-pages-artifact@v/deploy-pages@v1
-        with:
-          # Deployment configuration```
-
-Update the `uses: actions/upload-artifact@...
+          # Upload dist repository
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
