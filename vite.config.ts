@@ -83,5 +83,5 @@ export default defineConfig({
       ],
       
       
-  base: '/folio/'
+  base: 'mdobaidulislam1.github.io'
 });
